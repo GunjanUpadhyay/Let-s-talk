@@ -1,8 +1,8 @@
 import React from 'react'
 import {Helmet} from "react-helmet-async";
 
-const Title = ( title='Chat',
-description="This is the chattingg app",) => {
+const Title = ( {title='Lets talk',
+description="This is the chattingg app",}) => {
    
   return (
     <Helmet>
