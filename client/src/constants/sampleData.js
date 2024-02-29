@@ -6,5 +6,13 @@ export const sampleChats=[{
     name:"Gunjan",
     _id:"1",
     groupChat:false,
-    members:['1','2']
-}]
+    members:["1","2"]
+},
+{
+    avatar:[Avatar],
+    name:"Gunjan Upadhyay",
+    _id:"1",
+    groupChat:false,
+    members:["1","2"]
+},
+];

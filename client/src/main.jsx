@@ -8,7 +8,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
     <CssBaseline/>
+    <div onContextMenu={(e)=>handleDeleteChat(e,_id,groupChat)}>
     <App />
+    </div>
+
     </HelmetProvider>
   </React.StrictMode>,
 )
