@@ -16,3 +16,18 @@ export const sampleChats=[{
     members:["1","2"]
 },
 ];
+
+export const sampleUsers=[
+    {
+        avatar:[Avatar],
+        name:"Gunjan",
+        _id:"1",
+        
+    },
+    {
+        avatar:[Avatar],
+        name:"Gunjan Upadhyay",
+        _id:"1",
+       
+    },
+]

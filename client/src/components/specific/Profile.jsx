@@ -1,5 +1,11 @@
-import { Avatar, Stack, Icon, Typography } from "@mui/material";
+import { Avatar, Stack, Typography } from "@mui/material";
 import React from "react";
+import {
+  Face as FaceIcon,
+  AlternateEmail as UserNameIcon,
+  CalendarMonth as CalendarIcon,
+} from "@mui/icons-material";
+import  moment  from "moment";
 
 const Profile = () => {
   return (
@@ -14,11 +20,26 @@ const Profile = () => {
         }}
       />
       <ProfileCard heading={"Bio"} text={"sadas edvm lvnld nndlv"} />
+      <ProfileCard
+        heading={"Username"}
+        text={"gunjan_1"}
+        Icon={<UserNameIcon />}
+      />
+      <ProfileCard
+        heading={"name"}
+        text={"Gunjan Upadhyay"}
+        Icon={<FaceIcon />}
+      />
+      <ProfileCard
+        heading={"Joined"}
+        text={moment('1970-01-01T00:00:02.007Z').fromNow()}
+        Icon={<CalendarIcon/>}
+      />
     </Stack>
   );
 };
 
-const ProfileCard = ({ text, Icon, heading }) => {
+const ProfileCard = ({ text, Icon, heading }) => (
   <Stack
     direction={"row"}
     alignItems={"center"}
@@ -34,5 +55,5 @@ const ProfileCard = ({ text, Icon, heading }) => {
       </Typography>
     </Stack>
   </Stack>
-};
+);
 export default Profile;
