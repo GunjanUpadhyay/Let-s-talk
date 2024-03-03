@@ -28,7 +28,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [isMobile, setIsMobile] = useState(false);
-  const [isSearch, setIsSearch] = useState(true);
+  const [isSearch, setIsSearch] = useState(false);
   const [isNewGroup, setIsNewGroup] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
 

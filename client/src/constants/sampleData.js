@@ -31,3 +31,22 @@ export const sampleUsers=[
        
     },
 ]
+
+export const sampleNotification=[
+    {
+       sender:{
+        avatar:[Avatar],
+        name:"Gunjan",
+       },
+        _id:"1",
+        
+    },
+    {
+      sender:{
+        avatar:[Avatar],
+        name:"Gunjan Upadhyay",
+      },
+        _id:"1",
+       
+    },
+]
