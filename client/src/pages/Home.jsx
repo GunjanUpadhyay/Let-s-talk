@@ -1,9 +1,16 @@
 import React from 'react'
 import AppLayout from '../components/Layout/AppLayout'
+import { Box, Typography } from '@mui/material';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <Box bgcolor={"rgba(0,0,0,0.1"} height={"100%"}>
+      <Typography>
+        Let's Talk
+      </Typography>
+
+    </Box>
+
   )
 }
 
