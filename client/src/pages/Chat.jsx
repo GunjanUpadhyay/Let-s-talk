@@ -8,7 +8,14 @@ import {
 } from "@mui/icons-material";
 import { InputBox } from "../components/styles/StyledComponents";
 import FileMenu from "../components/dialogs/FileMenu";
+import { sampleMessage } from "../constants/sampleData";
+import MessageComponent from "../components/shared/MessageComponent";
 
+
+const user={
+  _id:"bjdbckk",
+  name:"Sanjana Upadhyay"
+}
 const Chat = () => {
   const containerRef = useRef(null);
   return (
@@ -25,7 +32,11 @@ const Chat = () => {
           overflowY: "auto",
         }}
       >
-        {}
+        {
+          sampleMessage.map((i)=>{
+<MessageComponent message={i} user={user}/>
+          })
+        }
       </Stack>
 
       <form
@@ -44,7 +55,11 @@ const Chat = () => {
             position:"absolute",
             left:"1.5rem",
             rotate:"30deg",
-          }}>
+          }}
+          
+        
+          
+          >
             <AttachFileIcon />
           </IconButton>
           <InputBox placeholder="Type Msg here...." />
@@ -67,7 +82,7 @@ const Chat = () => {
       </form>
 
 
-      <FileMenu/>
+      <FileMenu />
     </>
   );
 };
