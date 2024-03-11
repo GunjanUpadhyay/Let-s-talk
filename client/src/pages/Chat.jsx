@@ -11,11 +11,10 @@ import FileMenu from "../components/dialogs/FileMenu";
 import { sampleMessage } from "../constants/sampleData";
 import MessageComponent from "../components/shared/MessageComponent";
 
-
-const user={
-  _id:"bjdbckk",
-  name:"Sanjana Upadhyay"
-}
+const user = {
+  _id: "bjdbckk",
+  name: "Gunjan",
+};
 const Chat = () => {
   const containerRef = useRef(null);
   return (
@@ -32,11 +31,9 @@ const Chat = () => {
           overflowY: "auto",
         }}
       >
-        {
-          sampleMessage.map((i)=>{
-<MessageComponent message={i} user={user}/>
-          })
-        }
+        {sampleMessage.map((i) => {
+          <MessageComponent key={i._id} message={i} user={user} />
+        })}
       </Stack>
 
       <form
@@ -51,14 +48,12 @@ const Chat = () => {
           alignItems={"center"}
           position={"relative"}
         >
-          <IconButton sx={{
-            position:"absolute",
-            left:"1.5rem",
-            rotate:"30deg",
-          }}
-          
-        
-          
+          <IconButton
+            sx={{
+              position: "absolute",
+              left: "1.5rem",
+              rotate: "30deg",
+            }}
           >
             <AttachFileIcon />
           </IconButton>
@@ -67,7 +62,7 @@ const Chat = () => {
             type="submit"
             sx={{
               rotate: "-30deg",
-              bgcolor : orange ,
+              bgcolor: orange,
               // color: "white",
               marginLeft: "1rem",
               padding: "0.5rem",
@@ -80,7 +75,6 @@ const Chat = () => {
           </IconButton>
         </Stack>
       </form>
-
 
       <FileMenu />
     </>

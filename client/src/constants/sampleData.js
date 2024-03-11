@@ -64,4 +64,20 @@ export const sampleMessage = [
     chat: "chatId",
     createdAt: "2024-02-12T10:41:30.630Z",
   },
+  {
+    attachments: [
+      {
+        public_id: "nkdnv777j",
+        url: [Avatar],
+      },
+    ],
+    content: "nfdvn",
+    _id: "sdnvcsdknvjvk",
+    sender: {
+      _id: "bjdbckk",
+      name: "ndnodv999",
+    },
+    chat: "chatId",
+    createdAt: "2024-02-12T10:41:30.630Z",
+  },
 ];
