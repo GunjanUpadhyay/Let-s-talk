@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from "react";
+import React, { useState, memo, useEffect, lazy, Suspense } from "react";
 import {
   Grid,
   Tooltip,
@@ -9,6 +9,7 @@ import {
   Typography,
   TextField,
   Button,
+  Backdrop,
 } from "@mui/material";
 import { matBlack, orange } from "../constants/color";
 import {
@@ -23,6 +24,9 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "../components/styles/StyledComponents";
 import AvatarCard from "../components/shared/AvatarCard";
 import { sampleChats } from "../constants/sampleData";
+
+
+const ConfirmDeleteDialog =lazy(()=>import ( "../components/dialogs/ConfirmDeleteDialog"));
 
 const Groups = () => {
   const chatId = useSearchParams()[0].get("group");
@@ -229,7 +233,9 @@ const Groups = () => {
 
 
       {
-        confirmDeleteDialog && <>df</>
+        confirmDeleteDialog && (<Suspense fallback={<Backdrop open/>}>
+          <ConfirmDeleteDialog open={confirmDeleteDialog}/>
+        </Suspense>)
       }
 
       <Drawer
