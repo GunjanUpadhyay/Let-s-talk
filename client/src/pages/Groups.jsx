@@ -25,8 +25,16 @@ import { Link } from "../components/styles/StyledComponents";
 import AvatarCard from "../components/shared/AvatarCard";
 import { sampleChats } from "../constants/sampleData";
 
+const ConfirmDeleteDialog = lazy(() =>
+  import("../components/dialogs/ConfirmDeleteDialog")
+);
+const AddMemberDialog = lazy(() =>
+  import("../components/dialogs/AddMemberDialog")
+);
+const isAddMember=true;
 
-const ConfirmDeleteDialog =lazy(()=>import ( "../components/dialogs/ConfirmDeleteDialog"));
+
+
 
 const Groups = () => {
   const chatId = useSearchParams()[0].get("group");
@@ -37,7 +45,7 @@ const Groups = () => {
 
   const [isEdit, setIsEdit] = useState(false);
 
-  const [confirmDeleteDialog,setConfirmDeleteDialog] =useState(false);
+  const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
 
   const [groupName, setGroupName] = useState("");
   const [groupNameUpdatedValue, setGroupNameUpdatedValue] = useState("");
@@ -57,17 +65,20 @@ const Groups = () => {
     console.log(groupNameUpdatedValue);
   };
 
-  const openConfirmDeleteHandler=()=>{
+  const openConfirmDeleteHandler = () => {
     setConfirmDeleteDialog(true);
     console.log("Delete Group");
-  }
-  const closeConfirmDeleteHandler=()=>{
+  };
+  const closeConfirmDeleteHandler = () => {
     setConfirmDeleteDialog(false);
-  }
-  const openAddMemberhandler=()=>{
+  };
+  const openAddMemberhandler = () => {
     console.log("Add Member");
-  }
-  
+  };
+  const deleteHandler = () => {
+    console.log("delete Handler");
+    closeConfirmDeleteHandler();
+  };
 
   useEffect(() => {
     setGroupName(`Group Name ${chatId}`);
@@ -168,7 +179,12 @@ const Groups = () => {
       >
         Delete Group
       </Button>
-      <Button size="large" variant="contained" startIcon={<AddIcon />} onClick={openAddMemberhandler}>
+      <Button
+        size="large"
+        variant="contained"
+        startIcon={<AddIcon />}
+        onClick={openAddMemberhandler}
+      >
         Add Member
       </Button>
     </Stack>
@@ -231,12 +247,21 @@ const Groups = () => {
         )}
       </Grid>
 
-
       {
-        confirmDeleteDialog && (<Suspense fallback={<Backdrop open/>}>
-          <ConfirmDeleteDialog open={confirmDeleteDialog}/>
-        </Suspense>)
+        isAddMember && <Suspense fallback={<Backdrop open/>}>
+          <AddMemberDialog/>
+        </Suspense>
       }
+
+      {confirmDeleteDialog && (
+        <Suspense fallback={<Backdrop open />}>
+          <ConfirmDeleteDialog
+            open={confirmDeleteDialog}
+            handleClose={closeConfirmDeleteHandler}
+            deleteHandler={closeConfirmDeleteHandler}
+          />
+        </Suspense>
+      )}
 
       <Drawer
         sx={{
