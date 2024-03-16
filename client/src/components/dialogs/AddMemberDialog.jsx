@@ -20,7 +20,9 @@ const AddMemberDialog = ({ addMember, isLoadingAddMember, chatId }) => {
     setSelectedMembers([]);
     setMembers([]);
   };
-  const addMemberSubmitHandler = () => {};
+  const addMemberSubmitHandler = () => {
+    closeHandler();
+  };
   return (
     <Dialog open onClose={closeHandler}>
       <Stack p={"2rem"} width={"20rem"} spacing={"1rem"}>
