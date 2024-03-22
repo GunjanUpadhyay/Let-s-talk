@@ -1,9 +1,7 @@
-import { express } from "express";
-
+import  express  from "express";
+import {login} from "../controllers/user.js"
 const app=express.Router();
 
-app.get("/",(req,res)=>{
-    res.send("HEHHvldsn");
-})
+app.get("/login",login);
 
-export default app;
+export default app;            
