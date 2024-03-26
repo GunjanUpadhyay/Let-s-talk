@@ -10,4 +10,4 @@ app.get("/",(req,res)=>{res.send("knfv")})
 app.listen(3000,()=>{
     console.log("server")
 })
-// model : 27 min
+// model : 36:24 min
