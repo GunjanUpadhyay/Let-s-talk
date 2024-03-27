@@ -4,7 +4,7 @@ const schema =new Schema({
 
     content:String,
 
-    avatar:{
+    attachments:[{
         public_id:{
             type:String,
             required: true,
@@ -14,6 +14,7 @@ const schema =new Schema({
             required:true,
         },
     },
+],
 
     sender:{
         type: Types.ObjectId,
