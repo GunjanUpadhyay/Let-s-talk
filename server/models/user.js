@@ -30,7 +30,7 @@ const schema =new Schema({
     timestamps:true,
 });
 
-schema.pre("save",async function(){
+schema.pre("save",async function(next){
     if(!this.isModified("password")) next();
     
     this.password=await hash(this.password,10)
