@@ -3,6 +3,7 @@ import {User} from "../models/user.js";
 import { sendToken } from "../utils/features.js";
 import { TryCatch } from "../middlewares/error.js";
 import { ErrorHandler } from "../utils/utility.js";
+import { cookieOptions } from "../utils/features.js";
 
 // Create a new user and save it to the database & save in coookieee
 const newUser = async (req, res) => {
@@ -49,4 +50,25 @@ const getMyProfile= TryCatch(async(req,res)=>{
     user,
   });
 });
-export { login, newUser,getMyProfile };
+
+// logout
+const logout= TryCatch(async(req,res)=>{
+  
+ return res.status(200).cookie("letsTalk-token","",{...cookieOptions,maxAge:0}).json({
+    success: true,
+    message:"Logout out Successfully",
+  });
+});
+const searchUser= TryCatch(async(req,res)=>{
+  const {name}=req.query;
+
+  
+  return res.status(200).json({
+     success: true,
+     message:name,
+   });
+ });
+
+
+
+export { login, newUser,logout,getMyProfile,searchUser };
