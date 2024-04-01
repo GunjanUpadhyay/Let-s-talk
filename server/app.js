@@ -3,6 +3,7 @@ import { connectDB } from "./utils/features.js";
 import dotenv from 'dotenv'
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
+import {createUser} from './seeders/user.js'
 
 // Routes  
 import userRoute from "./routes/user.js"
