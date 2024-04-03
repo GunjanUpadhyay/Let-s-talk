@@ -7,6 +7,8 @@ import { ErrorHandler } from "../utils/utility.js";
 import { User } from "../models/user.js";
 import {Message} from "../models/message.js"
 
+import { deleteFilesFromCloudinary } from "../utils/features.js";
+
 const newGroupChat = TryCatch(async (req, res, next) => {
   const { name, members } = req.body;
   if (members.length < 2)
@@ -119,6 +121,7 @@ const addMembers = TryCatch(async (req, res, next) => {
     chat.members,
     `${allUsersName} has been added in the group`
   );
+
 
   emitEvent(req, REFETCH_CHATS, chat.members);
 
@@ -356,7 +359,7 @@ const deleteChat = TryCatch(async (req, res, next) => {
   );
 
   await Promise.all([
-    deletFilesFromCloudinary(public_ids),
+    deleteFilesFromCloudinary(public_ids),
     chat.deleteOne(),
     Message.deleteMany({ chat: chatId }),
   ]);
@@ -405,4 +408,4 @@ const getMessages = TryCatch(async (req, res, next) => {
 });
 
 
-export { newGroupChat, getMyChats ,getMyGroups,addMembers,removeMember,leaveGroup,sendAttachments};
+export { newGroupChat, getMyChats ,getMyGroups,addMembers,removeMember,leaveGroup,sendAttachments,getChatDetails,renameGroup,deleteChat,getMessages};

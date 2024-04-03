@@ -8,6 +8,7 @@ import {createUser} from './seeders/user.js'
 // Routes  
 import userRoute from "./routes/user.js"
 import chatRoute from "./routes/chat.js"
+import { createGroupChats, createMessagesInAChat, createSingleChats } from "./seeders/chat.js";
 
 dotenv.config({
     path: "./.env",
@@ -16,6 +17,10 @@ dotenv.config({
  const port =process.env.PORT || 3000;
 
  connectDB(mongoURI);
+
+// createSingleChats(10);
+// createGroupChats(10);
+// createMessagesInAChat("660d9671fc992efbcdf980ff",30)
 
 const app=express();
 
