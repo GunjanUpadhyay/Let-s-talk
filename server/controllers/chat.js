@@ -1,37 +1,41 @@
-import { ALERT, REFETCH_CHATS } from "../constants/event.js";
-import { getOtherMember } from "../lib/helper.js";
 import { TryCatch } from "../middlewares/error.js";
-import { Chat } from "../models/chat.js";
-import { emitEvent } from "../utils/features.js";
 import { ErrorHandler } from "../utils/utility.js";
+import { Chat } from "../models/chat.js";
+import {
+  deletFilesFromCloudinary,
+  emitEvent,
+  uploadFilesToCloudinary,
+} from "../utils/features.js";
+import {
+  ALERT,
+  NEW_MESSAGE,
+  NEW_MESSAGE_ALERT,
+  REFETCH_CHATS,
+} from "../constants/events.js";
+import { getOtherMember } from "../lib/helper.js";
 import { User } from "../models/user.js";
-import {Message} from "../models/message.js"
-
-import { deleteFilesFromCloudinary } from "../utils/features.js";
+import { Message } from "../models/message.js";
 
 const newGroupChat = TryCatch(async (req, res, next) => {
   const { name, members } = req.body;
-  if (members.length < 2)
-    return next(
-      new ErrorHandler("Group chat must have at least 3 members", 400)
-    );
 
   const allMembers = [...members, req.user];
+
   await Chat.create({
     name,
     groupChat: true,
     creator: req.user,
     members: allMembers,
   });
+
   emitEvent(req, ALERT, allMembers, `Welcome to ${name} group`);
-  emitEvent(req, REFETCH_CHATS, members); // this is for other members what thing is show after grp created
+  emitEvent(req, REFETCH_CHATS, members);
 
   return res.status(201).json({
     success: true,
     message: "Group Created",
   });
 });
-
 
 const getMyChats = TryCatch(async (req, res, next) => {
   const chats = await Chat.find({ members: req.user }).populate(
@@ -63,7 +67,6 @@ const getMyChats = TryCatch(async (req, res, next) => {
     chats: transformedChats,
   });
 });
-
 
 const getMyGroups = TryCatch(async (req, res, next) => {
   const chats = await Chat.find({
@@ -121,7 +124,6 @@ const addMembers = TryCatch(async (req, res, next) => {
     chat.members,
     `${allUsersName} has been added in the group`
   );
-
 
   emitEvent(req, REFETCH_CHATS, chat.members);
 
@@ -212,7 +214,6 @@ const leaveGroup = TryCatch(async (req, res, next) => {
   });
 });
 
-
 const sendAttachments = TryCatch(async (req, res, next) => {
   const { chatId } = req.body;
 
@@ -296,7 +297,6 @@ const getChatDetails = TryCatch(async (req, res, next) => {
   }
 });
 
-
 const renameGroup = TryCatch(async (req, res, next) => {
   const chatId = req.params.id;
   const { name } = req.body;
@@ -359,7 +359,7 @@ const deleteChat = TryCatch(async (req, res, next) => {
   );
 
   await Promise.all([
-    deleteFilesFromCloudinary(public_ids),
+    deletFilesFromCloudinary(public_ids),
     chat.deleteOne(),
     Message.deleteMany({ chat: chatId }),
   ]);
@@ -407,5 +407,16 @@ const getMessages = TryCatch(async (req, res, next) => {
   });
 });
 
-
-export { newGroupChat, getMyChats ,getMyGroups,addMembers,removeMember,leaveGroup,sendAttachments,getChatDetails,renameGroup,deleteChat,getMessages};
+export {
+  newGroupChat,
+  getMyChats,
+  getMyGroups,
+  addMembers,
+  removeMember,
+  leaveGroup,
+  sendAttachments,
+  getChatDetails,
+  renameGroup,
+  deleteChat,
+  getMessages,
+};

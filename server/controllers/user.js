@@ -224,7 +224,7 @@ const getMyFriends = TryCatch(async (req, res) => {
   } else {
     return res.status(200).json({
       success: true,
-      friends,     
+      friends,
     });
   }
 });
